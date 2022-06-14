@@ -1,20 +1,15 @@
 import {
-  Html,
   OrbitControls,
-  PerspectiveCamera,
   useGLTF,
 } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Outline } from '@react-three/postprocessing';
+import { Canvas } from '@react-three/fiber';
 import React, {
   Suspense,
   useState,
   forwardRef,
   useRef,
-  useEffect,
 } from 'react';
 import { GithubPicker } from 'react-color';
-import styled from 'styled-components';
 
 // 모델
 const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
@@ -31,7 +26,7 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
       orbit.current.autoRotate = true;
     }
     // hover 물체의 스케일 변경
-    e.object.scale.setScalar(action === 'hover' ? 1.01 : 1);
+    e.object.scale.setScalar(action === 'hover' ? 1.005 : 1);
   };
 
   return (
@@ -42,7 +37,6 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
         onPointerOut={(e) => hoverAction(e, 'nothover')}
         onPointerDown={(e) => (
           e.stopPropagation(),
-          console.log(e),
           setColors({ ...colors, picked: e.object.material.name })
         )}
       >
