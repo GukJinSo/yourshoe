@@ -1,0 +1,5 @@
+package com.yourshoe.app.home;
+
+public class HomeController {
+
+}
