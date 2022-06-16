@@ -12,7 +12,7 @@ const CustomChoice = () => {
     <div className='grids'>그리드컬럼5</div>
     <div className='grids'>그리드컬럼6</div>
     <div className='grids'>그리드컬럼7</div>
-    <div className='grids'>그리드컬럼8</div>
+    <div className='grids'>그리드컬럼88</div>
 
   </div>);
 };
