@@ -29,6 +29,7 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
     e.object.scale.setScalar(action === 'hover' ? 1.005 : 1);
   };
 
+
   return (
     <group ref={group} {...props} dispose={null} scale={0.1}>
       <group
@@ -40,7 +41,7 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
           setColors({ ...colors, picked: e.object.material.name })
         )}
       >
-        <mesh
+        <mesh loa
           geometry={nodes.Shoe_set_02_Sole_0.geometry}
           material-color={colors.Sole}
           material={materials.Sole}
@@ -80,7 +81,7 @@ const Picker = ({ colors, setColors }) => {
 };
 
 // Parent
-const Custom_service = () => {
+const CustomService = () => {
   // 상태 변수
   const [colors, setColors] = useState({
     picked: '',
@@ -91,7 +92,6 @@ const Custom_service = () => {
   });
 
   const orbit = useRef(null);
-
   return (
     <>
       <h1>{colors.picked === '' ? 'Click part!' : colors.picked}</h1>
@@ -108,11 +108,12 @@ const Custom_service = () => {
           />
           <directionalLight intensity={1.2} position={[-15, 25, 5]} />
           <ambientLight intensity={1} colors={'#EEEEEE'} />
-          <Model orbit={orbit} setColors={setColors} colors={colors} />
+          <Model orbit={orbit} setColors={setColors} colors={colors}/>
+          
         </Suspense>
       </Canvas>
     </>
   );
 };
 
-export default Custom_service;
+export default CustomService;
