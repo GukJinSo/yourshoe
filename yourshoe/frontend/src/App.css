@@ -1,3 +1,36 @@
+@font-face {
+  font-family: yide;
+  src: url('/public/font/YdestreetB.ttf') format('truetype');
+  font-weight: 800;
+}
+@font-face {
+  font-family: yide;
+  src: url('/public/font/YdestreetL.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url('/public/font/Pretendard-Thin.ttf') format('truetype');
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url('/public/font/Pretendard-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url('/public/font/Pretendard-Regular.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url('/public/font/Pretendard-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+
+
+
 .grid-container {
   margin: 0;
   padding: 0;
@@ -8,40 +41,17 @@
 
 .grid-container > div {
   height: 50vh;
-  border: 2px solid grey;
-}
-
-/* 데스크탑. 브라우저 창 width가 1024px보다 커지는 순간부터 적용 */
-@media screen and (min-width: 1024px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* 태블릿. 브라우저 창 width가 768px보다 커지는 순간부터 적용 */
-@media screen and (min-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* 모바일. 브라우저 창 width가 768px보다 작아지는 순간부터 적용 */
-@media screen and (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .github-picker {
   position: absolute !important;
-  transform: translateX(-50%);
   display: block;
-  top: 75vh;
-  left: 50vw;
   z-index: 3;
 }
 
-h1 {
+.custom-float-text {
+  font-family: "Pretendard";
+  font-weight: 500;
   position: absolute;
   transform: translateX(-50%);
   top: 25vh;
@@ -55,6 +65,65 @@ h1 {
   text-align: left;
   z-index: 1;
 }
+.custom-desc-div > h2, .custom-desc-div > h4{
+  font-family: yide;
+  font-weight: 800;
+}
+
+.custom-desc-div li{
+  font-family: "Pretendard";
+  font-weight: 500;
+  list-style: none;
+}
+
+/* 데스크탑. 브라우저 창 width가 1024px보다 커지는 순간부터 적용 */
+@media screen and (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .github-picker{
+    transform: translateX(-50%);
+    top: 75vh;
+    left: 50vw;
+  }
+}
+
+/* 태블릿. 브라우저 창 width가 768px보다 커지는 순간부터 적용 */
+@media screen and (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .github-picker{
+    transform: translateX(-50%);
+    top: 75vh;
+    left: 50vw;
+  }
+}
+
+/* 모바일. 브라우저 창 width가 768px보다 작아지는 순간부터 적용 */
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 100%;
+  }
+  .github-picker{
+    transform: translateX(-50%);
+    top: 37vh;
+    left: 50vw;
+    width: 200px !important;
+  }
+
+  .custom-float-text{
+    top:6vh;
+  }
+
+  .custom-desc-div{
+    padding: 20px;
+  }
+}
+
+
 
 Canvas {
   margin: 0;

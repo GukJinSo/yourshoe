@@ -2,18 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CustomService from './CustomService';
 
+
+const CustomText = () => {
+  return <div className = 'custom-desc-div'>
+    <h2>Newbalance 997H
+  </h2>
+  <h4>89,000원</h4>
+    <li>Synthetic upper</li>
+    <li>Lightweight injection-molded EVA foam midsole provides lightweight cushioning</li>
+    <li>Rubber outsole</li>
+    <li>Lace-up closure for a secure fit</li>
+    
+  
+  </div>
+}
+
 const CustomChoice = () => {
+  
   return (
   <div className='grid-container'>
-    <div className='grids'>그리드컬럼1</div>
-    <div className='grids'><CustomService></CustomService></div>
-    <div className='grids'>그리드컬럼3</div>
-    <div className='grids'>그리드컬럼4</div>
-    <div className='grids'>그리드컬럼5</div>
-    <div className='grids'>그리드컬럼6</div>
-    <div className='grids'>그리드컬럼7</div>
-    <div className='grids'>그리드컬럼88</div>
-
+    <CustomService></CustomService>
+    <CustomText />
   </div>);
 };
 

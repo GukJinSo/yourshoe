@@ -91,28 +91,33 @@ const CustomService = () => {
     Sole: '#ffffff',
   });
 
+  const CustomText = () => {
+    return <div className="custom-float-text">{colors.picked === '' ? '부분 선택' : colors.picked}</div>
+  }
+
   const orbit = useRef(null);
   return (
-    <>
-      <h1>{colors.picked === '' ? 'Click part!' : colors.picked}</h1>
+    <div>
+      <CustomText  />
       <Picker className="github-picker" setColors={setColors} colors={colors} />
       <Canvas>
         <Suspense fallback={null}>
           <OrbitControls
             ref={orbit}
-            minDistance={60}
+            minDistance={50}
             enablePan={false}
             enableZoom={false}
             autoRotate={true}
-            autoRotateSpeed={0.4}
+            autoRotateSpeed={0.8}
+          
           />
           <directionalLight intensity={1.2} position={[-15, 25, 5]} />
-          <ambientLight intensity={1} colors={'#EEEEEE'} />
+          <ambientLight intensity={0.5} colors={'#EEEEEE'} />
           <Model orbit={orbit} setColors={setColors} colors={colors}/>
-          
+
         </Suspense>
       </Canvas>
-    </>
+    </div>
   );
 };
 
