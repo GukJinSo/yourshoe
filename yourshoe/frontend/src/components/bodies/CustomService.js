@@ -92,16 +92,16 @@ const CustomService = () => {
   });
 
   const CustomText = () => {
-    return <div className="custom-float-text">{colors.picked === '' ? '부분 선택' : colors.picked}</div>
+    return <div className="custom-float-text">{colors.picked === '' ? 'Click any part' : colors.picked}</div>
   }
 
   const orbit = useRef(null);
+
   return (
     <div>
       <CustomText  />
       <Picker className="github-picker" setColors={setColors} colors={colors} />
       <Canvas>
-        <Suspense fallback={null}>
           <OrbitControls
             ref={orbit}
             minDistance={50}
@@ -109,13 +109,15 @@ const CustomService = () => {
             enableZoom={false}
             autoRotate={true}
             autoRotateSpeed={0.8}
-          
+            minPolarAngle={1}
+            maxPolarAngle={1.7}
           />
           <directionalLight intensity={1.2} position={[-15, 25, 5]} />
           <ambientLight intensity={0.5} colors={'#EEEEEE'} />
+        <Suspense>
           <Model orbit={orbit} setColors={setColors} colors={colors}/>
-
         </Suspense>
+
       </Canvas>
     </div>
   );
