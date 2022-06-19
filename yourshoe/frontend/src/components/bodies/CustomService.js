@@ -98,7 +98,7 @@ const CustomService = () => {
   const orbit = useRef(null);
 
   return (
-    <div>
+    <div className='canvas-div'>
       <CustomText  />
       <Picker className="github-picker" setColors={setColors} colors={colors} />
       <Canvas>
