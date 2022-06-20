@@ -28,19 +28,15 @@
   font-weight: 700;
 }
 
-
-
-
-.grid-container {
+.container {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  display: grid;
 }
 
-.grid-container .canvas-div {
-  height: 50vh;
+.image-grid .canvas-div, .image-grid img {
+  width: 100%;
 }
 
 .github-picker {
@@ -76,9 +72,6 @@
   list-style: none;
 }
 
-.sizePicking-div{
-  padding: 20px;
-}
 
 .button-grids{
   display: grid;
@@ -93,9 +86,23 @@
   border: none;
 }
 
-/* 데스크탑. 브라우저 창 width가 1024px보다 커지는 순간부터 적용 */
-@media screen and (min-width: 1024px) {
-  .grid-container {
+.button-grids{
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+.button-grids > button {
+  border: 1px solid grey;
+  background-color: white; 
+  min-height: 30px;
+}
+.button-grids .clicked-button{
+  background-color: black;
+  color:white
+}
+
+/* 태블릿. 브라우저 창 width가 768px보다 커지는 순간부터 적용
+@media screen and (max-width: 1024px) {
+  .container {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -104,24 +111,12 @@
     top: 75vh;
     left: 50vw;
   }
-}
-
-/* 태블릿. 브라우저 창 width가 768px보다 커지는 순간부터 적용 */
-@media screen and (min-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .github-picker{
-    transform: translateX(-50%);
-    top: 75vh;
-    left: 50vw;
-  }
-}
+} */
 
 /* 모바일. 브라우저 창 width가 768px보다 작아지는 순간부터 적용 */
 @media screen and (max-width: 768px) {
-  .grid-container {
+  .container {
+    display: grid;
     grid-template-columns: 100%;
   }
   .github-picker{
@@ -130,6 +125,13 @@
     left: 50vw;
     width: 200px !important;
   }
+  .canvas-div{
+    height: 50vh;
+  }
+
+  .image-grid img {
+    display: none;
+  }
 
   .custom-float-text{
     top:6vh;
@@ -137,19 +139,52 @@
   .custom-desc-div{
     padding: 20px;
   }
-  .button-grids{
-    grid-template-columns: repeat(5, 1fr);
+
+}
+
+
+/* 데스크탑. 브라우저 창 width가 1024px보다 커지는 순간부터 적용 */
+@media screen and (min-width: 1024px) {
+
+  
+  .container {
+    padding: 20px 50px;
+    margin:0 auto;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: 60% 35%;
+    box-sizing: border-box;
+    max-width: 1600px;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
     grid-gap: 10px;
+    max-width: 1200px;
   }
+
+  .custom-desc-div{
+    min-width: 300px;
+    max-width: 500px;
+  }
+
+  .image-grid .canvas-div, .image-grid img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .github-picker{
+    transform: translateX(-50%);
+    top: 75vh;
+    left: 50vw;
+  }
+  
+
   .button-grids > button {
-    border: 1px solid grey;
-    height: 50px;
-    background-color: white;
+    min-width: 3.4em;
   }
-  .button-grids .clicked-button{
-    background-color: black;
-    color:white
-  }
+
 }
 
 
@@ -157,8 +192,8 @@
 Canvas {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   background-image: url('/public/img/custom_bg.jpg');
   background-size: cover;
   z-index: 0;

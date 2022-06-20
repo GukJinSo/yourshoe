@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import back_997h from '../../img/997h_back.jpg';
+import side_997h from '../../img/997h_side.jpg';
+import diagonal_997h from '../../img/997h_diagonal.jpg';
+import upside_997h from '../../img/997h_upside.jpg';
+import rside_997h from '../../img/997h_reverse_side.jpg';
+
+
 import CustomService from './CustomService';
 
 
@@ -13,8 +20,11 @@ const CustomText = () => {
     <li>Lightweight injection-molded EVA foam midsole provides lightweight cushioning</li>
     <li>Rubber outsole</li>
     <li>Lace-up closure for a secure fit</li>
+    <ButtonGrids />
   </div>
 }
+
+
 
 const ButtonGrids = () => {
   
@@ -44,7 +54,7 @@ const ButtonGrids = () => {
     {size:18, stock:0} 
   ]
 
-const grids = useRef();
+  const grids = useRef();
 
   const handleClick = (e) => {
 
@@ -56,17 +66,17 @@ const grids = useRef();
   }
 
   return( 
-  <div className='sizePicking-div'>
-    <h5>Select size</h5>
-  <div className="button-grids" ref={grids}>
-    {buttons.map((button)=>{
-      return button.stock !== 0? <button onClick={(e)=>handleClick(e)} >{button.size}</button> : <button disabled>{button.size}</button>
-    })}
-  </div>
-  <div>
-  <button className='orderButton' >Order now</button>
-  </div>
-  </div>)
+    <div className=''>
+      <h5>Select size</h5>
+      <div className="button-grids" ref={grids}>
+        {buttons.map((button)=>{
+        return button.stock !== 0? <button onClick={(e)=>handleClick(e)} >{button.size}</button> : <button disabled>{button.size}</button>
+      })}
+      </div>
+      <div>
+        <button className='orderButton' >Order now</button>
+      </div>
+    </div>)
   
 
 }
@@ -74,11 +84,18 @@ const grids = useRef();
 const CustomChoice = () => {
   
   return (
-  <div className='grid-container'>
-    <CustomService></CustomService>
-    <CustomText />
-    <ButtonGrids />
-
+    <div>
+      <div className='container'>
+        <div className='image-grid'>
+          <img src={side_997h} alt="측면"></img>
+          <CustomService></CustomService>
+          <img src={back_997h} alt="후면"></img>
+          <img src={diagonal_997h} alt="후면"></img>
+          <img src={upside_997h} alt="후면"></img>
+          <img src={rside_997h} alt="후면"></img>  
+        </div>
+      <CustomText />
+    </div>
   </div>);
 };
 

@@ -10,6 +10,8 @@ import React, {
   useRef,
 } from 'react';
 import { GithubPicker } from 'react-color';
+import { Provider} from 'react-redux';
+import { createStore} from 'redux';
 
 // 모델
 const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
