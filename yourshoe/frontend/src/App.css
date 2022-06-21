@@ -147,6 +147,10 @@
 @media screen and (min-width: 1024px) {
 
   
+  .custom-float-text{
+    display: none;
+  }
+
   .container {
     padding: 20px 50px;
     margin:0 auto;
@@ -178,6 +182,7 @@
     transform: translateX(-50%);
     top: 75vh;
     left: 50vw;
+    display: none !important;
   }
   
 
@@ -186,8 +191,6 @@
   }
 
 }
-
-
 
 Canvas {
   margin: 0;
