@@ -127,6 +127,9 @@
     width: 200px !important;
     position: absolute !important;
   }
+  .custom-float-text {
+    display: block;
+  }
   .canvas-div {
     height: 50vh;
   }
@@ -140,6 +143,9 @@
   }
   .custom-desc-div {
     padding: 20px;
+  }
+  .desktop-picker-desc {
+    display: none;
   }
 }
 

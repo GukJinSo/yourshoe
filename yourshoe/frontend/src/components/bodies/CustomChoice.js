@@ -16,9 +16,14 @@ const CustomText = () => {
     <div className="custom-desc-div">
       <h2>Newbalance 997H</h2>
       <h4>89.99$</h4>
-      <h5 class="desktop-picker-desc">
+      <h5
+        class="desktop-picker-desc"
+        style={{
+          color: colors.picked === '' ? 'grey' : 'salmon',
+        }}
+      >
         {colors.picked === ''
-          ? '좌측의 오브젝트 파츠를 클릭하여 색상 미리보기'
+          ? '좌측의 오브젝트 파츠를 클릭하여 커스터마이즈 색상 미리보기'
           : colors.picked + ' 선택됨'}
       </h5>
       <Picker className="github-picker" />
@@ -75,6 +80,7 @@ const ButtonGrids = () => {
   return (
     <div className="">
       <h5>Select size</h5>
+
       <div className="button-grids" ref={grids}>
         {buttons.map((button) => {
           return button.stock !== 0 ? (
@@ -84,6 +90,7 @@ const ButtonGrids = () => {
           );
         })}
       </div>
+
       <div>
         <button className="orderButton">Order now</button>
       </div>
