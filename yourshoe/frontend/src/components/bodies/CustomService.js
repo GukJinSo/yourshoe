@@ -1,20 +1,12 @@
-import {
-  OrbitControls,
-  useGLTF,
-} from '@react-three/drei';
+import { OrbitControls, useContextBridge, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, {
-  Suspense,
-  useState,
-  forwardRef,
-  useRef,
-} from 'react';
+import React, { Suspense, useState, forwardRef, useRef } from 'react';
 import { GithubPicker } from 'react-color';
-import { Provider} from 'react-redux';
-import { createStore} from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { COLOR_ACTION_TYPES } from '../../store';
 
 // 모델
-const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
+const Model = forwardRef(({ orbit, colors, dispatcher, ...props }, refs) => {
   const group = useRef();
   const { nodes, materials } = useGLTF('/3d/nb_997/scene.gltf');
 
@@ -31,7 +23,6 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
     e.object.scale.setScalar(action === 'hover' ? 1.005 : 1);
   };
 
-
   return (
     <group ref={group} {...props} dispose={null} scale={0.1}>
       <group
@@ -40,21 +31,22 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
         onPointerOut={(e) => hoverAction(e, 'nothover')}
         onPointerDown={(e) => (
           e.stopPropagation(),
-          setColors({ ...colors, picked: e.object.material.name })
+          dispatcher({
+            type: COLOR_ACTION_TYPES.pick,
+            payload: { picked: e.object.material.name },
+          })
         )}
       >
-        <mesh loa
+        <mesh
           geometry={nodes.Shoe_set_02_Sole_0.geometry}
-          material-color={colors.Sole}
           material={materials.Sole}
+          material-color={colors.Sole}
         />
-
         <mesh
           geometry={nodes.Shoe_set_02_Outer_0.geometry}
           material={materials.Outer}
           material-color={colors.Outer}
         />
-        <mesh></mesh>
         <mesh
           geometry={nodes.Shoe_set_02_Laces_0.geometry}
           material={materials.Laces}
@@ -70,56 +62,48 @@ const Model = forwardRef(({ orbit, colors, setColors, ...props }, refs) => {
   );
 });
 
-// 색깔 변경 픽커
-const Picker = ({ colors, setColors }) => {
-  const colorChange = (color) => {
-    if (colors[colors.picked] !== '') {
-      colors[colors.picked] = color.hex;
-      setColors({ ...colors });
-    }
-  };
-
-  return <GithubPicker onChange={(e) => colorChange(e)}></GithubPicker>;
-};
-
-// Parent
-const CustomService = () => {
-  // 상태 변수
-  const [colors, setColors] = useState({
-    picked: '',
-    Laces: '#ffffff',
-    Inner: '#ffffff',
-    Outer: '#ffffff',
-    Sole: '#ffffff',
-  });
-
-  const CustomText = () => {
-    return <div className="custom-float-text">{colors.picked === '' ? 'Click any part' : colors.picked}</div>
-  }
-
-  const orbit = useRef(null);
+const CustomText = () => {
+  const colors = useSelector((store) => store);
+  const dispatcher = useDispatch();
 
   return (
-    <div className='canvas-div'>
-      <CustomText  />
-      <Picker className="github-picker" setColors={setColors} colors={colors} />
-      <Canvas>
-          <OrbitControls
-            ref={orbit}
-            minDistance={50}
-            enablePan={false}
-            enableZoom={false}
-            autoRotate={true}
-            autoRotateSpeed={0.8}
-            minPolarAngle={1}
-            maxPolarAngle={1.7}
-          />
-          <directionalLight intensity={1.2} position={[-15, 25, 5]} />
-          <ambientLight intensity={0.5} colors={'#EEEEEE'} />
-        <Suspense>
-          <Model orbit={orbit} setColors={setColors} colors={colors}/>
-        </Suspense>
+    <div className="custom-float-text">
+      {colors.picked === '' ? 'Click any part' : colors.picked}
+    </div>
+  );
+};
 
+const CustomService = () => {
+  const orbit = useRef(null);
+
+  // three-react-fiber issude. canvas 안에서 context가 소멸하는 현상이 있다
+  // 리덕스를 쓰더라도 불가피하게 props로 전달
+  const colors = useSelector((store) => store);
+  const dispatcher = useDispatch();
+
+  return (
+    <div className="canvas-div">
+      <CustomText />
+      <Canvas>
+        <OrbitControls
+          ref={orbit}
+          minDistance={50}
+          enablePan={false}
+          enableZoom={false}
+          autoRotate={true}
+          autoRotateSpeed={0.8}
+          minPolarAngle={1}
+          maxPolarAngle={1.7}
+        />
+        <directionalLight intensity={1.2} position={[-15, 25, 5]} />
+        <ambientLight intensity={0.5} colors={'#EEEEEE'} />
+
+        <Model
+          orbit={orbit}
+          colors={colors}
+          dispatcher={dispatcher}
+          position={[0, -5, 0]}
+        />
       </Canvas>
     </div>
   );
