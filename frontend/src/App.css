@@ -62,10 +62,17 @@
   text-align: left;
   z-index: 1;
 }
-.custom-desc-div > h2,
-.custom-desc-div > h4 {
-  font-family: yide;
-  font-weight: 800;
+
+.custom-desc-div h4 {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.custom-desc-div h5 {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .custom-desc-div li {

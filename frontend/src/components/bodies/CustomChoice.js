@@ -7,6 +7,7 @@ import rside_997h from '../../img/997h_reverse_side.jpg';
 import CustomService from './CustomService';
 import Picker from '../Picker';
 import { useDispatch, useSelector } from 'react-redux';
+import { $CombinedState } from 'redux';
 
 const CustomText = () => {
   const colors = useSelector((store) => store);
@@ -15,26 +16,25 @@ const CustomText = () => {
   return (
     <div className="custom-desc-div">
       <h2>Newbalance 997H</h2>
-      <h4>89.99$</h4>
-      <h5
+      <h4>89,000원</h4>
+      <div
         class="desktop-picker-desc"
         style={{
           color: colors.picked === '' ? 'grey' : 'salmon',
         }}
       >
-        {colors.picked === ''
-          ? '좌측의 오브젝트 파츠를 클릭하여 커스터마이즈 색상 미리보기'
-          : colors.picked + ' 선택됨'}
-      </h5>
+        <li>
+          {colors.picked === ''
+            ? '좌측의 오브젝트 파츠를 클릭하여 커스터마이즈 색상 미리보기'
+            : colors.picked + ' 선택됨'}
+        </li>
+      </div>
       <Picker className="github-picker" />
-      <h5>Description</h5>
-      <li>Synthetic upper</li>
-      <li>
-        Lightweight injection-molded EVA foam midsole provides lightweight
-        cushioning
-      </li>
-      <li>Rubber outsole</li>
-      <li>Lace-up closure for a secure fit</li>
+      <h4>설명</h4>
+      <li>일체형 가죽</li>
+      <li>경량 사출 성형 EVA 폼 미드솔로 경량 쿠션 제공</li>
+      <li>생고무 밑창</li>
+      <li>안전한 착용감을 위한 레이스업 클로저</li>
       <ButtonGrids />
     </div>
   );
@@ -79,7 +79,7 @@ const ButtonGrids = () => {
 
   return (
     <div className="">
-      <h5>Select size</h5>
+      <h4>사이즈 선택</h4>
 
       <div className="button-grids" ref={grids}>
         {buttons.map((button) => {
