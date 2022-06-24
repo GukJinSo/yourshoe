@@ -8,6 +8,8 @@
 # test
 /coverage
 
+# git test
+
 # production
 /build
 
